@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clean Fuel Checker</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#f4f7f8;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+    }
+
+    .container{
+        background:white;
+        width:380px;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 10px 25px rgba(0,0,0,.15);
+        text-align:center;
+    }
+
+    h1{
+        color:#2e7d32;
+        margin-bottom:20px;
+    }
+
+    select{
+        width:100%;
+        padding:12px;
+        font-size:16px;
+        border-radius:8px;
+        border:1px solid #ccc;
+        margin-bottom:20px;
+    }
+
+    button{
+        width:100%;
+        padding:12px;
+        background:#2e7d32;
+        color:white;
+        border:none;
+        border-radius:8px;
+        font-size:16px;
+        cursor:pointer;
+        transition:.3s;
+    }
+
+    button:hover{
+        background:#1b5e20;
+    }
+
+    .result{
+        margin-top:25px;
+        padding:15px;
+        border-radius:10px;
+        display:none;
+        font-weight:bold;
+        line-height:1.6;
+    }
+
+    .green{
+        background:#d4edda;
+        color:#155724;
+    }
+
+    .yellow{
+        background:#fff3cd;
+        color:#856404;
+    }
+
+    .red{
+        background:#f8d7da;
+        color:#721c24;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>🌱 Clean Fuel Checker</h1>
+
+    <select id="fuel">
+        <option value="">-- Select Fuel --</option>
+        <option value="electricity">Electricity (Renewable)</option>
+        <option value="hydrogen">Green Hydrogen</option>
+        <option value="biodiesel">Biodiesel</option>
+        <option value="ethanol">Ethanol</option>
+        <option value="naturalgas">Natural Gas</option>
+        <option value="diesel">Diesel</option>
+        <option value="petrol">Petrol (Gasoline)</option>
+        <option value="coal">Coal</option>
+    </select>
+
+    <button onclick="checkFuel()">Check Fuel</button>
+
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+function checkFuel(){
+
+    const fuel = document.getElementById("fuel").value;
+    const result = document.getElementById("result");
+
+    result.className = "result";
+
+    if(fuel === ""){
+        result.style.display="block";
+        result.classList.add("yellow");
+        result.innerHTML="Please select a fuel.";
+        return;
+    }
+
+    switch(fuel){
+
+        case "electricity":
+            result.classList.add("green");
+            result.innerHTML=
+            "✅ Excellent Choice<br><br>Renewable electricity produces little to no direct emissions.";
+            break;
+
+        case "hydrogen":
+            result.classList.add("green");
+            result.innerHTML=
+            "✅ Clean Fuel<br><br>Green hydrogen is produced using renewable energy and has very low emissions.";
+            break;
+
+        case "biodiesel":
+            result.classList.add("green");
+            result.innerHTML=
+            "✅ Cleaner Alternative<br><br>Biodiesel can reduce greenhouse gas emissions compared to conventional diesel.";
+            break;
+
+        case "ethanol":
+            result.classList.add("yellow");
+            result.innerHTML=
+            "⚠ Moderately Clean<br><br>Ethanol can reduce emissions but still produces CO₂ when burned.";
+            break;
+
+        case "naturalgas":
+            result.classList.add("yellow");
+            result.innerHTML=
+            "⚠ Transitional Fuel<br><br>Natural gas emits less CO₂ than coal or diesel but is still a fossil fuel.";
+            break;
+
+        case "diesel":
+            result.classList.add("red");
+            result.innerHTML=
+            "❌ High Emissions<br><br>Diesel produces significant greenhouse gases and air pollutants.";
+            break;
+
+        case "petrol":
+            result.classList.add("red");
+            result.innerHTML=
+            "❌ High Emissions<br><br>Petrol contributes substantially to carbon emissions.";
+            break;
+
+        case "coal":
+            result.classList.add("red");
+            result.innerHTML=
+            "❌ Not Clean<br><br>Coal has one of the highest carbon emissions among common fuels.";
+            break;
+    }
+
+    result.style.display="block";
+}
+</script>
+
+</body>
+</html>
